@@ -1,0 +1,58 @@
+﻿<Page x:Class="UnoApp4.Presentation.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:UnoApp4.Presentation"
+      
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      xmlns:um="using:Uno.Material"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource BackgroundBrush}">
+  
+  <ScrollViewer>
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <utu:NavigationBar Content="{Binding Title}" />
+
+      <StackPanel Grid.Row="1" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Spacing="16">
+
+        <TextBox Text="{Binding MaxPlayer, Mode=TwoWay}" Width="100"
+PlaceholderText="Enter max player for random:" />
+        <Button Content="Create"
+        AutomationProperties.AutomationId="SecondPageButton"
+        Command="{Binding GoToSecond}" />
+
+        
+          <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate >
+            <DataTemplate  x:DataType="local:ButtonEntityModel">
+
+              <Button Content="{Binding Content}"  IsEnabled="{x:Bind IsEnabled,Mode=OneWay}"  Background="Green" Width="100" Margin="5,10" CornerRadius="3" >
+                  
+                </Button>
+
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        
+      </StackPanel>
+
+      <Button  Grid.Row="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="10" Command="{Binding ClickMe}" IsEnabled="{Binding ClickMeClickeble}"  >
+        <TextBlock FontSize="50">Бас!</TextBlock>
+        </Button>
+
+    </Grid>
+  </ScrollViewer>
+</Page>
