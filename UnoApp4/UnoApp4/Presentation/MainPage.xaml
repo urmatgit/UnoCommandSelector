@@ -8,53 +8,82 @@
       xmlns:um="using:Uno.Material"
       NavigationCacheMode="Required"
       Background="{ThemeResource BackgroundBrush}">
-  
-  <ScrollViewer>
-    <Grid utu:SafeArea.Insets="VisibleBounds">
-      <Grid.RowDefinitions>
-        
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="*"/>
-      </Grid.RowDefinitions>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <utu:TabBar SelectedIndex="0" x:Name="tabBar"
+              Style="{StaticResource TopTabBarStyle}"
+              xmlns:utu="using:Uno.Toolkit.UI">
+      <utu:TabBar.Items>
+        <utu:TabBarItem Content="Оючулар" Tag="player">
+          <utu:TabBarItem.Icon>
+            <SymbolIcon Symbol="Home" />
+          </utu:TabBarItem.Icon>
+        </utu:TabBarItem>
+        <utu:TabBarItem Content="Командалар" Tag="teams">
+          <utu:TabBarItem.Icon>
+            <FontIcon Glyph="&#xE8F2;" />
+          </utu:TabBarItem.Icon>
+        </utu:TabBarItem>
+      </utu:TabBar.Items>
+    </utu:TabBar>
+    <Grid x:Name="pageContainer"
+              Grid.Row="1">
+      <Grid utu:SafeArea.Insets="VisibleBounds" x:Name="player">
+        <Grid.RowDefinitions>
+
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
 
-      <StackPanel Grid.Row="0" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
+        <StackPanel Grid.Row="0" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Spacing="16">
 
-        <TextBox Text="{Binding MaxPlayer, Mode=TwoWay}" Width="100"
+          <TextBox Text="{Binding MaxPlayer, Mode=TwoWay}" Width="100"
 PlaceholderText="Enter max player for random:" />
-        <Button Content="Create"
+          <Button Content="Create"
         AutomationProperties.AutomationId="SecondPageButton"
         Command="{Binding GoToSecond}" />
-      </StackPanel>
-      <StackPanel Grid.Row="1"   Padding="10">
+        </StackPanel>
+        <StackPanel Grid.Row="1"   Padding="10">
 
-        <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
+          <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
                 <WrapPanel  Orientation="Horizontal"/>
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate >
-            <DataTemplate  >
+              <DataTemplate  >
 
-              <Button Content="{Binding Content}"  IsEnabled="{Binding IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
-                  
+                <Button Content="{Binding Content}"  IsEnabled="{Binding IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
+
                 </Button>
 
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>
-        
-      </StackPanel>
 
-      <Button  Grid.Row="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="10" Command="{Binding ClickMe}" IsEnabled="{Binding ClickMeClickeble}"  >
-        <TextBlock FontSize="50">Бас!</TextBlock>
+        </StackPanel>
+
+        <Button  Grid.Row="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="10" Command="{Binding ClickMe}" IsEnabled="{Binding ClickMeClickeble}"  >
+          <TextBlock FontSize="50">Бас!</TextBlock>
         </Button>
 
+      </Grid>
+      <Grid x:Name="teams"
+                  Visibility="Collapsed">
+        <TextBlock Text="teams"
+                           FontSize="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center" />
+      </Grid>
     </Grid>
-  </ScrollViewer>
+  </Grid>
 </Page>

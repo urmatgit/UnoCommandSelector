@@ -47,5 +47,16 @@
       ThemeService;
     </UnoFeatures>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Presentation\CommandPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Presentation\CommandPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Presentation\CommandPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 
 </Project>
