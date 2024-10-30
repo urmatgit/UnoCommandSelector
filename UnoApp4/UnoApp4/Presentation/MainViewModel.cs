@@ -5,15 +5,15 @@ namespace UnoApp4.Presentation;
 public partial class MainViewModel : ObservableObject
 {
     private INavigator _navigator;
-    private List<int> exitPlayers=new List<int>();
+    private List<int> exitPlayers = new List<int>();
 
     [ObservableProperty]
     private string? name;
     [ObservableProperty]
     private int? maxPlayer;
     [ObservableProperty]
-    private bool clickMeClickeble=false;
-    
+    private bool clickMeClickeble = false;
+
 
     [ObservableProperty]
     private ObservableCollection<ButtonEntityModel> buttons = new ObservableCollection<ButtonEntityModel>();
@@ -35,33 +35,49 @@ public partial class MainViewModel : ObservableObject
     public ICommand ClickMe { get; }
     private async Task ClickMeCommand()
     {
-        if (exitPlayers.Count == 1)
-        {
-            buttons.SingleOrDefault(x => x.Index == exitPlayers[0]).isEnabled = false;
 
-        }
-        else
-        {
-            var selector = new Random();
-            int selected = selector.Next(0, exitPlayers.Count);
-            var indexButton = exitPlayers[selected];
-            buttons.SingleOrDefault(x => x.Index == indexButton).isEnabled = false;
-            exitPlayers.RemoveAll(x=>x== indexButton);
-        }
+        var selector = new Random();
+        int selected = selector.Next(0, exitPlayers.Count);
+        var indexButton = exitPlayers[selected];
+
+        exitPlayers.RemoveAll(x => x == indexButton);
+
+        await ShowSimpleDialog(indexButton);
+        await RedrawButtons();
+        
         ClickMeClickeble = exitPlayers.Count > 0;
+    }
+    public async Task ShowSimpleDialog(int number)
+    {
+        //var result = await _navigator.ShowMessageDialogAsync<string>(this, title: "Сенин командан", content: $"{number}!!!");
+        await _navigator.NavigateViewModelAsync<SecondViewModel>(this, data: new Entity($"{number}"),qualifier: Qualifiers.Dialog);
+    }
+    private async Task RedrawButtons()
+    {
+        Buttons.Clear();
+        for (int i = 1; i < maxPlayer + 1; i++)
+        {
+            var buttonEntity = new ButtonEntityModel();
+            buttonEntity.isEnabled = exitPlayers.Any(z => z == i);
+
+            buttonEntity.Index = i;
+            buttonEntity.Content = i.ToString();
+            Buttons.Add(buttonEntity);
+        }
     }
     private async Task GoToSecondView()
     {
         Buttons.Clear();
         exitPlayers.Clear();
-        for (int i = 1; i < maxPlayer+1; i++)
+        for (int i = 1; i < maxPlayer + 1; i++)
         {
+            exitPlayers.Add(i);
             var buttonEntity = new ButtonEntityModel();
             //buttonEntity.IsEnabled = false;
             buttonEntity.Index = i;
             buttonEntity.Content = i.ToString();
             Buttons.Add(buttonEntity);
-            exitPlayers.Add(i);
+
         }
         ClickMeClickeble = exitPlayers.Count > 0;
     }

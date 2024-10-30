@@ -12,13 +12,14 @@
   <ScrollViewer>
     <Grid utu:SafeArea.Insets="VisibleBounds">
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
+        
+        <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <utu:NavigationBar Content="{Binding Title}" />
 
-      <StackPanel Grid.Row="1" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
+
+      <StackPanel Grid.Row="0" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Spacing="16">
@@ -28,18 +29,19 @@ PlaceholderText="Enter max player for random:" />
         <Button Content="Create"
         AutomationProperties.AutomationId="SecondPageButton"
         Command="{Binding GoToSecond}" />
+      </StackPanel>
+      <StackPanel Grid.Row="1"   Padding="10">
 
-        
-          <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
+        <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
-                <WrapPanel Orientation="Horizontal"/>
+                <WrapPanel  Orientation="Horizontal"/>
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate >
             <DataTemplate  x:DataType="local:ButtonEntityModel">
 
-              <Button Content="{Binding Content}"  IsEnabled="{x:Bind IsEnabled,Mode=OneWay}"  Background="Green" Width="100" Margin="5,10" CornerRadius="3" >
+              <Button Content="{Binding Content}"  IsEnabled="{x:Bind IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
                   
                 </Button>
 
