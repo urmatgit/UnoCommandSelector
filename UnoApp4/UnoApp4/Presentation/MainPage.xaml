@@ -39,9 +39,9 @@ PlaceholderText="Enter max player for random:" />
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate >
-            <DataTemplate  x:DataType="local:ButtonEntityModel">
+            <DataTemplate  >
 
-              <Button Content="{Binding Content}"  IsEnabled="{x:Bind IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
+              <Button Content="{Binding Content}"  IsEnabled="{Binding IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
                   
                 </Button>
 
