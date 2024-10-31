@@ -14,8 +14,8 @@
       <RowDefinition Height="*" />
       <RowDefinition Height="60"/>
     </Grid.RowDefinitions>
-    <utu:NavigationBar Content="Main Page"
-                            Style="{StaticResource MaterialNavigationBarStyle}" />
+    <!--<utu:NavigationBar Content="Main Page"
+                            Style="{StaticResource MaterialNavigationBarStyle}" />-->
     <Grid uen:Region.Attached="True"
               uen:Region.Navigator="Visibility"
               Grid.Row="1">
