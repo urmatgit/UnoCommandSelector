@@ -10,7 +10,7 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string? name;
     [ObservableProperty]
-    private int? maxPlayer;
+    private int? maxPlayer=5;
     [ObservableProperty]
     private bool clickMeClickeble = false;
 

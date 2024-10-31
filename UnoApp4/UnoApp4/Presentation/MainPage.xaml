@@ -8,82 +8,88 @@
       xmlns:um="using:Uno.Material"
       NavigationCacheMode="Required"
       Background="{ThemeResource BackgroundBrush}">
-  <Grid>
+  <Grid uen:Region.Attached="True">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
+      <RowDefinition Height="60"/>
     </Grid.RowDefinitions>
-    <utu:TabBar SelectedIndex="0" x:Name="tabBar"
-              Style="{StaticResource TopTabBarStyle}"
-              xmlns:utu="using:Uno.Toolkit.UI">
-      <utu:TabBar.Items>
-        <utu:TabBarItem Content="Оючулар" Tag="player">
-          <utu:TabBarItem.Icon>
-            <SymbolIcon Symbol="Home" />
-          </utu:TabBarItem.Icon>
-        </utu:TabBarItem>
-        <utu:TabBarItem Content="Командалар" Tag="teams">
-          <utu:TabBarItem.Icon>
-            <FontIcon Glyph="&#xE8F2;" />
-          </utu:TabBarItem.Icon>
-        </utu:TabBarItem>
-      </utu:TabBar.Items>
-    </utu:TabBar>
-    <Grid x:Name="pageContainer"
+    <utu:NavigationBar Content="Main Page"
+                            Style="{StaticResource MaterialNavigationBarStyle}" />
+    <Grid uen:Region.Attached="True"
+              uen:Region.Navigator="Visibility"
               Grid.Row="1">
-      <Grid utu:SafeArea.Insets="VisibleBounds" x:Name="player">
-        <Grid.RowDefinitions>
+      <Grid uen:Region.Name="One"     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   Visibility="Visible">
+        <Grid   VerticalAlignment="Stretch" >
+          <Grid.RowDefinitions>
 
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
 
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
+          <StackPanel Grid.Row="0" Orientation="Horizontal"  x:Name="TopPanel" Padding="10"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Spacing="16">
 
-          <TextBox Text="{Binding MaxPlayer, Mode=TwoWay}" Width="100"
+            <TextBox Text="{Binding MaxPlayer, Mode=TwoWay}" Width="100"
 PlaceholderText="Enter max player for random:" />
-          <Button Content="Create"
+            <Button Content="Create"
         AutomationProperties.AutomationId="SecondPageButton"
         Command="{Binding GoToSecond}" />
-        </StackPanel>
-        <StackPanel Grid.Row="1"   Padding="10">
+          </StackPanel>
+          <StackPanel Grid.Row="1"   Padding="10">
 
-          <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <WrapPanel  Orientation="Horizontal"/>
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate >
-              <DataTemplate  >
+            <ItemsControl ItemsSource="{Binding Buttons,Mode=TwoWay}" >
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel  Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate >
+                <DataTemplate  >
 
-                <Button Content="{Binding Content}"  IsEnabled="{Binding IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
+                  <Button Content="{Binding Content}"  IsEnabled="{Binding IsEnabled,Mode=TwoWay}" Margin="5,3"  Background="Green" Width="100"  CornerRadius="3" >
 
-                </Button>
+                  </Button>
 
-              </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-        </StackPanel>
+          </StackPanel>
 
-        <Button  Grid.Row="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="10" Command="{Binding ClickMe}" IsEnabled="{Binding ClickMeClickeble}"  >
-          <TextBlock FontSize="50">Бас!</TextBlock>
-        </Button>
+          <Button  Grid.Row="2" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="10" Command="{Binding ClickMe}" IsEnabled="{Binding ClickMeClickeble}"  >
+            <TextBlock FontSize="50">Бас!</TextBlock>
+          </Button>
 
+        </Grid>
       </Grid>
-      <Grid x:Name="teams"
-                  Visibility="Collapsed">
-        <TextBlock Text="teams"
-                           FontSize="30"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center" />
-      </Grid>
+
     </Grid>
+    <utu:TabBar Grid.Row="2"
+                    uen:Region.Attached="True"
+                    VerticalAlignment="Bottom">
+      <utu:TabBar.Items>
+        <utu:TabBarItem uen:Region.Name="One"  >
+          <utu:TabBarItem.Icon>
+          <SymbolIcon Symbol="Home" />
+          </utu:TabBarItem.Icon>
+          <TextBlock  >
+            Оюнчулар
+          </TextBlock>
+        </utu:TabBarItem>
+
+        <utu:TabBarItem uen:Region.Name="Teams" >
+          <utu:TabBarItem.Icon>
+            <FontIcon Glyph="&#xE8F2;" />
+          </utu:TabBarItem.Icon>
+          <TextBlock >Командалар</TextBlock>
+        </utu:TabBarItem>
+      </utu:TabBar.Items>
+    </utu:TabBar>
   </Grid>
 </Page>
